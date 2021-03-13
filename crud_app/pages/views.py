@@ -1,36 +1,48 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.http import HttpResponse
 
-
 from .models import Employee
-import pandas as pd
+from .forms import EmployeeCreate
 
 def index(request):
     return render(request,'index.html')
 
+def create_employee(request):
+    upload = EmployeeCreate()
+    if request.method == 'POST':
+        upload = EmployeeCreate(request.POST, request.FILES)
+        if upload.is_valid():
+            upload.save()
+            return redirect('create_employee')
+        else:
+            return HttpResponse("""your form is wrong, reload on <a href = "{{ url : 'index'}}">reload</a>""")
+    else:
+        return render(request, 'pages/upload_form.html', {'upload_form':upload})
+
+def delete_employee(request, id):
+    id = int(id)
+    try:
+        employee_sel = Employee.objects.get(employee_ID = id)
+    except Employee.DoesNotExist:
+        return redirect('index')
+    employee_sel.delete()
+    return redirect('employee_list')
+
+def update_employee(request, id):
+    id = int(id)
+    try:
+        employee_sel = Employee.objects.get(employee_ID = id)
+    except Employee.DoesNotExist:
+        return redirect('index')
+    employee_form = EmployeeCreate(request.POST or None, instance = employee_sel)
+    if employee_form.is_valid():
+       employee_form.save()
+       return redirect('employee_list')
+    return render(request, 'pages/upload_form.html', {'upload_form':employee_form})
+
 def employee_list(request):
-    # latest_question_list = Employee.objects.order_by('-id')
-    # names = [] 
-    # names.append([q.name for q in latest_question_list])
-    # rates = [] 
-    # rates.append([q.hourly_rate for q in latest_question_list])
-    # return HttpResponse(rates)
     employee_list = Employee.objects.order_by('-id')[:5]
-    #template = loader.get_template('pages/employee_list.html')
     context = {'employee_list': employee_list}
     return render(request, 'pages/employee_list.html', context)
 
-def detail(request, id):
-    employee = get_object_or_404(Employee, pk=id)
-    return render(request, 'pages/detail.html', {'employee': employee})
-# Create your views here.
-# def detail(request, id):
-#     return HttpResponse("You're looking at employee %s." % id)
-
-# def results(request, id):
-#     response = "You're looking at the results of employee %s."
-#     return HttpResponse(response % id)
-
-# def vote(request, id):
-#     return HttpResponse("You're voting on question %s." % id)
