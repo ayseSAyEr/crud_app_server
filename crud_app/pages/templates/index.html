@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <!-- Basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
-    </head>
-
-<div id="overviews" class="section wb">
-    <div class="container">
-        <div class="section-title row text-center">
-            <div class="col-md-8 offset-md-2">
-                <h3>CRUD web app project</h3>
-                <p class="lead">This is a test template</p>
-            </div>
-        </div><!-- end title -->
-    </div><!-- end container -->
-</div><!-- end section -->
+{% load static %}
+<html>
+<head>
+    <title>Employee App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#d2dddc;">
+<nav class="navbar navbar-light" style="background-color:#43a5dd;">
+    <a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#eceae5;color:#000000;">Admin</a>
+    <a href="{% url 'index' %}" class = 'navbar-link btn-lg' style="background-color:#eceae5;color:#000000;">Main Page</a>
+    <a href="{% url 'employee_list' %}" class = 'navbar-link btn-lg' style="background-color:#eceae5;color:#000000;">List All Employees</a>
+    <a href="{% url 'create_employee' %}" class="navbar-link btn-lg" style="background-color:#eceae5;color:#000000;">Add New Employees</a>
+</nav>
+<br>
+{% block content %}
+<center>
+<br>
+<h> Welcome to my first CRUD project</h>
+<br><h> This project has been developed by Ayse Erozan</h>
+</center>
+{% endblock %}
+</body>
+</html>
