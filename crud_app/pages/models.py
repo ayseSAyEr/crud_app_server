@@ -5,3 +5,6 @@ class Employee(models.Model):
     employee_ID = models.IntegerField()
     team = models.CharField(max_length=100)
     hourly_rate = models.FloatField()
+
+    def __str__(self):
+        return self.name
