@@ -1,9 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
 {% if employee_list %}
     <ul>
     {% for employee in employee_list %}
-        <li><p> {{ employee.name }} :  {{ employee.hourly_rate }}</p></li>
+        <li><p> {{ employee.employee_ID }} .  {{ employee.name }} <a href="update_employee/{{employee.employee_ID}}" class="btn btn-warning" id = '{{employee.employee_ID}}'>edit</a><a href="delete_employee/{{employee.employee_ID}}" class="btn btn-danger" id = '{{employee.employee_ID}}'>delete</a></p> </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No pages are available.</p>
 {% endif %}
+{% endblock %}
