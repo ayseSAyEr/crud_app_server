@@ -14,6 +14,10 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def salary(self):
+        return self.hourly_rate * 160 * self.working_percentage / 100 
     
 # create team table
 class Team(models.Model):
