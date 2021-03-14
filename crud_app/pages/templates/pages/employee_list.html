@@ -3,7 +3,7 @@
 {% if employee_list %}
     <ul>
     {% for employee in employee_list %}
-        <li><p> {{ employee.employee_ID }} .  {{ employee.name }} <a href="update_employee/{{employee.employee_ID}}" class="btn btn-warning" id = '{{employee.employee_ID}}'>edit</a><a href="delete_employee/{{employee.employee_ID}}" class="btn btn-danger" id = '{{employee.employee_ID}}'>delete</a></p> </li>
+        <li><p> {{ employee.name }} {{ employee.surname }} <a href="update_employee/{{employee.id}}" class="btn btn-warning" id = '{{employee.id}}'>edit</a><a href="delete_employee/{{employee.id}}" class="btn btn-danger" id = '{{employee.id}}'>delete</a></p> </li>
     {% endfor %}
     </ul>
 {% else %}
