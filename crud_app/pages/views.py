@@ -48,7 +48,13 @@ def update_employee(request, id):
 
 # shows all employees in the employee list
 def employee_list(request):
-    employee_list = Employee.objects.order_by('-id')[:5]
+    employee_list = Employee.objects.order_by('-id')
     context = {'employee_list': employee_list}
     return render(request, 'pages/employee_list.html', context)
+
+# forward employee salary pages
+def calculate_salary(request):
+    employee_list = Employee.objects.order_by('-id')
+    context = {'employee_list':employee_list}
+    return render(request,  'pages/salary.html', context)
 
