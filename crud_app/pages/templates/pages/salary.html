@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
+{% if employee_list %}
+    <ul>
+    {% for employee in employee_list %}
+        <li><p> {{ employee.name }} {{ employee.surname }} {{ employee.salary }}</p> </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No pages are available.</p>
+{% endif %}
+{% endblock %}
