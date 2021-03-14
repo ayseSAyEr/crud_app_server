@@ -12,6 +12,8 @@ urlpatterns = [
     path('update_employee/<int:id>', views.update_employee, name = 'update_employee'),
     # delete 
     path('delete_employee/<int:id>', views.delete_employee, name = 'delete_employee'),
+    # calculate salary
+    path('calculate_salary', views.calculate_salary, name = 'calculate_salary'),
     
     # # ex: /polls/5/
     # path('<int:id>/', views.detail, name='detail'),
